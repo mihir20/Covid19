@@ -27,6 +27,18 @@ public class Resource {
     @Expose
     private String state;
 
+    public Resource(String category, String city,
+                    String contact, String descriptionandorserviceprovided,
+                    String nameoftheorganisation, String phonenumber, String state) {
+        this.category = category;
+        this.city = city;
+        this.contact = contact;
+        this.descriptionandorserviceprovided = descriptionandorserviceprovided;
+        this.nameoftheorganisation = nameoftheorganisation;
+        this.phonenumber = phonenumber;
+        this.state = state;
+    }
+
     public String getCategory() {
         return category;
     }
