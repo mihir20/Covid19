@@ -5,11 +5,19 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
+import android.util.Log;
 
-import com.example.covid19.Adapters.ResourcesAdapter;
-import com.example.covid19.Classes.Resource;
+import com.example.covid19.adapters.ResourcesAdapter;
+import com.example.covid19.classes.Resource;
+import com.example.covid19.classes.ResourceResponse;
+import com.example.covid19.rest.ApiClient;
+import com.example.covid19.rest.ApiInterface;
 
 import java.util.ArrayList;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class ResourcesActivity extends AppCompatActivity {
     RecyclerView resRV;
@@ -20,18 +28,27 @@ public class ResourcesActivity extends AppCompatActivity {
         setContentView(R.layout.activity_resources);
         resources=new ArrayList<>();
         intiViews();
-        createDemoList();
-        ResourcesAdapter adapter = new ResourcesAdapter(resources);
-        resRV.setAdapter(adapter);
-        resRV.setLayoutManager(new LinearLayoutManager(this));
+        createList();
     }
 
-    private void createDemoList() {
-        for(int i=0;i<20;i++){
-            resources.add(new Resource("test lab","jaipur",
-                    "jamenv, jkd","this is best","SMS",
-                    "946792368","Rajasthan"));
-        }
+    private void createList() {
+        ApiInterface apiService = ApiClient.getClient().create(ApiInterface.class);
+        Call<ResourceResponse> call = apiService.getResources();
+        call.enqueue(new Callback<ResourceResponse>() {
+            @Override
+            public void onResponse(Call<ResourceResponse> call, Response<ResourceResponse> response) {
+                assert response.body() != null;
+                resources= (ArrayList<Resource>) response.body().getResources();
+                ResourcesAdapter adapter = new ResourcesAdapter(resources);
+                resRV.setAdapter(adapter);
+                resRV.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
+            }
+
+            @Override
+            public void onFailure(Call<ResourceResponse> call, Throwable t) {
+                Log.e("REST",t.toString());
+            }
+        });
     }
 
     private void intiViews() {

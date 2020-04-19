@@ -1,4 +1,4 @@
-package com.example.covid19.Classes;
+package com.example.covid19.classes;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;

@@ -1,4 +1,4 @@
-package com.example.covid19.Adapters;
+package com.example.covid19.adapters;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -9,7 +9,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.covid19.Classes.Resource;
+import com.example.covid19.classes.Resource;
 import com.example.covid19.R;
 
 import java.util.List;
