@@ -37,7 +37,7 @@ public class ResourcesAdapter extends RecyclerView.Adapter<ResourcesAdapter.View
         holder.phoneTV.setText(res.getPhonenumber());
         holder.catagoryTV.setText(res.getCategory());
         holder.contactTV.setText(res.getContact());
-        holder.desTV.setText(res.getContact());
+        holder.desTV.setText(res.getDescriptionandorserviceprovided());
         holder.nameTV.setText(res.getNameoftheorganisation());
         holder.cityTV.setText(res.getCity().concat(",").concat(res.getState()));
     }
@@ -47,9 +47,9 @@ public class ResourcesAdapter extends RecyclerView.Adapter<ResourcesAdapter.View
         return mResources.size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
-        public TextView nameTV, catagoryTV, cityTV, desTV, contactTV, phoneTV;
-        public ViewHolder(@NonNull View itemView) {
+    static class ViewHolder extends RecyclerView.ViewHolder {
+        TextView nameTV, catagoryTV, cityTV, desTV, contactTV, phoneTV;
+        ViewHolder(@NonNull View itemView) {
             super(itemView);
             
             nameTV=itemView.findViewById(R.id.res_itm_name);
