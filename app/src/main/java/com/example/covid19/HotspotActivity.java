@@ -38,7 +38,7 @@ public class HotspotActivity extends AppCompatActivity implements LocationListen
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             return;
         }
-        locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 10000, 0, this);
+        locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 1000, 0, this);
         intiViews();
         findHotspots();
     }
@@ -55,7 +55,7 @@ public class HotspotActivity extends AppCompatActivity implements LocationListen
             @Override
             public void onResponse(Call<TravelHistoryResponse> call, Response<TravelHistoryResponse> response) {
                 mTravelHistories = (ArrayList<TravelHistory>) response.body().getTravelHistory();
-                Log.e("TRAVEL HISTORY", mTravelHistories.get(0).getLatlong());
+//                Log.e("TRAVEL HISTORY", mTravelHistories.get(0).getLatlong());
             }
 
             @Override
@@ -68,8 +68,7 @@ public class HotspotActivity extends AppCompatActivity implements LocationListen
     @Override
     public void onLocationChanged(Location location) {
         if (mTravelHistories.size()!=0){
-            Log.e("LOACTION",location.toString());
-
+//            Log.e("LOACTION",location.toString());
             try {
                 findNearestHotspot(location);
             } catch (ParseException e) {
